@@ -1,0 +1,44 @@
+#include <iostream>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+bool searchInBinaryTree(TreeNode* root, int target) {
+    if (root == nullptr) {
+        return false;
+    }
+
+    if (root->val == target) {
+        return true;
+    }
+
+    // Recursively search the left and right subtrees
+    return searchInBinaryTree(root->left, target) || searchInBinaryTree(root->right, target);
+}
+
+int main() {
+    // Construct the binary tree
+    TreeNode* root = new TreeNode(10);
+    root->left = new TreeNode(5);
+    root->right = new TreeNode(15);
+    root->left->left = new TreeNode(3);
+    root->left->right = new TreeNode(7);
+    root->right->right = new TreeNode(18);
+
+    int target1 = 7;
+    int target2 = 20;
+
+    bool found1 = searchInBinaryTree(root, target1);
+    bool found2 = searchInBinaryTree(root, target2);
+
+    cout << "Found " << target1 << ": " << found1 << endl;
+    cout << "Found " << target2 << ": " << found2 << endl;
+
+    return 0;
+}
